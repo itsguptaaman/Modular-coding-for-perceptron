@@ -1,1 +1,1 @@
-## **Python Scripting and modular coding for perceptoron**
+## **Python Scripting and modular coding for perceptron**
