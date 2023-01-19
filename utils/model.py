@@ -1,19 +1,12 @@
 import os
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-
-import seaborn as sns
 import joblib
-from matplotlib.colors import ListedColormap
 import warnings
-
 warnings.filterwarnings("ignore")
-plt.style.use("fivethirtyeight")  # << Optional >>
+
 
 # Creating a perceptorn classs from stratch
-
-
 class Perceptron:
 
     def __init__(self, learning_rate: float = None, epochs: int = None):
