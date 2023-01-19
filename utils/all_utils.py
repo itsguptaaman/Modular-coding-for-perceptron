@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-
+import logging
 import seaborn as sns
 import joblib
 from matplotlib.colors import ListedColormap
@@ -15,6 +15,16 @@ plt.style.use("fivethirtyeight")  # << Optional >>
 
 
 def prepare_data(df, target_column="y"):
+    """This function will prepare data (Dependent and Independent features)
+
+    Args:
+        df (pd.DataFrame): This is a Data Frame
+        target_column (str, optional): Label column name is given Defaults to "y".
+
+    Returns:
+        Tuple: returns Labels and X
+    """
+    logging.info(">>>> Prepraing data for training <<<<")
     X = df.drop(target_column, axis=1)
     y = df[target_column]
 
@@ -24,6 +34,7 @@ def prepare_data(df, target_column="y"):
 def save_plot(df, model, file_name="plot.png", plot_dir="plots"):
 
     def _create_base_plot(df):
+        logging.info(">>>> Creating the base plot <<<<")
         df.plot(kind="scatter", x="x1", y="x2", c="y", s=100, cmap="coolwarm")
         plt.axhline(y=0, color="black", linestyle="--", linewidth=1)
         plt.axvline(x=0, color="black", linestyle="--", linewidth=1)
@@ -32,6 +43,7 @@ def save_plot(df, model, file_name="plot.png", plot_dir="plots"):
         figure.set_size_inches(10, 8)
 
     def _plot_decision_regions(X, y, classifier, resolution=0.02):
+        logging.info(">>>> Ploting the decisions info <<<<")
         colors = ("cyan", "lightgreen")
         cmap = ListedColormap(colors)
 
@@ -62,3 +74,4 @@ def save_plot(df, model, file_name="plot.png", plot_dir="plots"):
     os.makedirs(plot_dir, exist_ok=True)
     plot_path = os.path.join(plot_dir, file_name)
     plt.savefig(plot_path)
+    logging.info(f">>>> Saving the plot at {plot_path} <<<<")
